@@ -3747,9 +3747,13 @@ class Nominativo {
       context: ctx,
       // anchorPoint: Offset(0, 0),
       barrierDismissible: true,
+      useSafeArea: true,
+     
+      
       // useSafeArea: true,
       builder: (BuildContext context) {
         return Dialog(
+
             insetPadding: EdgeInsets.only(top: 0),
             alignment: Alignment.topLeft,
             shape: RoundedRectangleBorder(

@@ -42,6 +42,18 @@ dependencies:
   pine: ^1.0.3
   bloc: ^8.1.4
   flutter_bloc: ^8.1.6
+  percent_indicator: ^4.0.1
+  syncfusion_flutter_charts: ^28.1.37
+  equatable: ^2.0.7
+  dio: ^5.7.0
+  responsive_grid: ^2.4.4
+  intl: ^0.20.2
+  json_annotation: ^4.9.0
+  build_runner: ^2.4.15
+  json_serializable: ^6.9.4
+  
+ 
+
 
 dev_dependencies:
   flutter_test:
