@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:np2024_01/models/products/Ingredient.dart';
+import 'package:np2024_01/widgets/bottomBarFrame.dart';
 
 class IngredientListContainer extends StatefulWidget {
   List<Ingredient> lst;
@@ -133,23 +134,7 @@ class _IngredientListContainerState extends State<IngredientListContainer>
                   }).toList(),
                 ),
               )),
-              Container(
-                height: 20,
-                color: const Color.fromARGB(255, 49, 49, 49),
-                child: Padding(
-                  padding: const EdgeInsets.only(right: 10),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Icon(
-                        Icons.chat_bubble,
-                        color: Colors.white,
-                        size: 17,
-                      )
-                    ],
-                  ),
-                ),
-              )
+              appBarFrame(),
             ],
           ),
         );

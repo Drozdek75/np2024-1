@@ -51,6 +51,7 @@ class MyApp extends StatelessWidget {
           child: MaterialApp(
               // onGenerateRoute: generateRouter.generateRoute,
               debugShowCheckedModeBanner: false,
+              
               title: 'Np 2024_01',
               theme: ThemeData(
                 primarySwatch: Colors.blue,

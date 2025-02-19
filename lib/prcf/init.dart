@@ -47,7 +47,7 @@ class _initState extends State<init> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
+    return SafeArea(      
         child: GestureDetector(
       onVerticalDragEnd: (details) {
         print(details.globalPosition.dx);
@@ -59,10 +59,11 @@ class _initState extends State<init> {
         }
       },
       child: Scaffold(
+        floatingActionButtonLocation: FloatingActionButtonLocation.endContained,
         floatingActionButton: GestureDetector(
           onVerticalDragEnd: (details) {
             if (details.globalPosition.dy >
-                MediaQuery.of(context).size.height) {
+                MediaQuery.of(context).size.height - 15) {
               setState(() {
                 _suggestion = false;
               });
@@ -1190,7 +1191,18 @@ class _initState extends State<init> {
                     height: 20,
                     color: const Color.fromARGB(255, 49, 49, 49),
                     child: Row(
-                      children: [],
+                      children: [
+                        Container(
+                          color: Colors.blue,
+                          width: 40,
+                          height: 20,
+                          child: Icon(
+                            Icons.storefront,
+                            color: Colors.white,
+                            size: 15,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ],
@@ -2417,6 +2429,17 @@ class _initState extends State<init> {
                                 color: const Color.fromARGB(255, 230, 243, 89),
                               )),
                             ),
+                            Expanded(
+                                child: Container(
+                              height: 40,
+                              color: Colors.transparent,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  
+                                ],
+                              ),
+                            ))
                           ]),
                         ),
                       ),
@@ -2636,6 +2659,22 @@ class _initState extends State<init> {
                                               255, 232, 232, 232),
                                         )),
                                   ),
+                                   Container(
+                                    width: 65,
+                                    height: 50,
+                                    decoration: BoxDecoration(
+                                        color: const Color.fromARGB(255, 223, 43, 43),
+                                        border: Border.all(
+                                            width: 0.2, color: Colors.black45)),
+                                    child: TextButton(
+                                        onPressed: () {},
+                                        child: Icon(
+                                          Icons.remove,
+                                          size: 22,
+                                          color: const Color.fromARGB(
+                                              255, 232, 232, 232),
+                                        )),
+                                  ),
                                 ],
                               ),
                             )),
@@ -2648,12 +2687,7 @@ class _initState extends State<init> {
                                       color: Colors.black,
                                       height: 20,
                                       child: Row(
-                                        children: [
-                                          Container(
-                                            color: const Color.fromARGB(
-                                                255, 19, 218, 22),
-                                          )
-                                        ],
+                                        children: [],
                                       ),
                                     ),
                                   ],
