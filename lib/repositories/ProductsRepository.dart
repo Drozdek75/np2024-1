@@ -5,7 +5,7 @@ import 'package:np2024_01/models/products/Ingredient.dart';
 import 'package:np2024_01/models/products/Product.dart';
 
 class Productsrepository {
-  final String path = 'http://87.14.242.187:8080/env/getAllProducts';
+  final String path = 'http://95.249.90.164:8080/env/getAllProducts';
   final dio = Dio();
 
   Future<List<Product>> getAllProducts() async {
@@ -27,7 +27,6 @@ class Productsrepository {
               id: ing['id'],
               notes: ing['notes'],
               price: ing['price']));
-              
         });
       }
 
