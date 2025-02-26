@@ -109,6 +109,10 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
         );
       },
     );
+
+    on<IngredientTypeLoad>((event, emit) async {
+      await ingredientRepo.getAllIngredientType();
+    });
   }
 
   @override

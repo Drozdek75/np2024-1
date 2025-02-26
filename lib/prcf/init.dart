@@ -10,6 +10,7 @@ import 'package:np2024_01/widgets/FloatingSuggestion.dart';
 import 'package:np2024_01/widgets/IngredientListContainer.dart';
 import 'package:np2024_01/widgets/intensionFrame.dart';
 import 'package:np2024_01/widgets/listProductContainer.dart';
+import 'package:np2024_01/widgets/meterManagement/halfMeters.dart';
 import 'package:np2024_01/widgets/nominativi.dart';
 
 class init extends StatefulWidget {
@@ -25,6 +26,8 @@ class _initState extends State<init> {
   TextEditingController hourController = TextEditingController();
   bool _vis = true;
   bool _vis_sub = false;
+  bool _vis_mm_panel = false;
+  bool _vis_detail_panel = true;
   bool _suggestion = false;
   int select_controller = -1;
 
@@ -47,7 +50,7 @@ class _initState extends State<init> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(      
+    return SafeArea(
         child: GestureDetector(
       onVerticalDragEnd: (details) {
         print(details.globalPosition.dx);
@@ -192,362 +195,131 @@ class _initState extends State<init> {
 
                         //************************* dettaglio ordine a video ****************************************************/
 
-                        Container(
-                          color: const Color.fromARGB(255, 252, 255, 178),
-                          height: MediaQuery.of(context).size.height - 423,
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Expanded(
-                                child: SingleChildScrollView(
-                                  scrollDirection: Axis.vertical,
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Container(
+                        Visibility(visible: _vis_mm_panel, child: halfMeters()),
+
+                        Visibility(
+                          visible: _vis_detail_panel,
+                          child: Container(
+                            color: const Color.fromARGB(255, 252, 255, 178),
+                            height: MediaQuery.of(context).size.height - 423,
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Expanded(
+                                  child: SingleChildScrollView(
+                                    scrollDirection: Axis.vertical,
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Container(
+                                            padding: EdgeInsets.all(8),
+                                            child: Row(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Container(
+                                                  width: 20,
+                                                  child: Text('#'),
+                                                ),
+                                                Container(
+                                                  width: 200,
+                                                  child: Text('descrizione'),
+                                                ),
+                                                Expanded(
+                                                    child: Container(
+                                                  child: Text('prezzo'),
+                                                )),
+                                                Expanded(
+                                                    child: Container(
+                                                  child: Text('totale'),
+                                                ))
+                                              ],
+                                            )),
+                                        Container(
                                           padding: EdgeInsets.all(8),
                                           child: Row(
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
                                             children: [
                                               Container(
                                                 width: 20,
-                                                child: Text('#'),
+                                                child: Text('1'),
                                               ),
                                               Container(
                                                 width: 200,
-                                                child: Text('descrizione'),
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text('margherita'),
+                                                    Text('  -mozzarella'),
+                                                    Text('  +carciofi')
+                                                  ],
+                                                ),
                                               ),
                                               Expanded(
                                                   child: Container(
-                                                child: Text('prezzo'),
+                                                child: Text('8.50'),
                                               )),
                                               Expanded(
                                                   child: Container(
-                                                child: Text('totale'),
-                                              ))
+                                                      child: Text('8.50')))
                                             ],
-                                          )),
-                                      Container(
-                                        padding: EdgeInsets.all(8),
-                                        child: Row(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          children: [
-                                            Container(
-                                              width: 20,
-                                              child: Text('1'),
-                                            ),
-                                            Container(
-                                              width: 200,
-                                              child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Text('margherita'),
-                                                  Text('  -mozzarella'),
-                                                  Text('  +carciofi')
-                                                ],
-                                              ),
-                                            ),
-                                            Expanded(
-                                                child: Container(
-                                              child: Text('8.50'),
-                                            )),
-                                            Expanded(
-                                                child: Container(
-                                                    child: Text('8.50')))
-                                          ],
+                                          ),
                                         ),
-                                      ),
-                                      Container(
-                                        padding: EdgeInsets.all(8),
-                                        child: Row(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          children: [
-                                            Container(
-                                              width: 20,
-                                              child: Text('1'),
-                                            ),
-                                            Container(
-                                              width: 200,
-                                              child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Text('margherita'),
-                                                  Text('  -mozzarella'),
-                                                  Text('  +carciofi')
-                                                ],
-                                              ),
-                                            ),
-                                            Expanded(
-                                                child: Container(
-                                              child: Text('8.50'),
-                                            )),
-                                            Expanded(
-                                                child: Container(
-                                                    child: Text('8.50')))
-                                          ],
-                                        ),
-                                      ),
-                                      Container(
-                                        padding: EdgeInsets.all(8),
-                                        child: Row(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          children: [
-                                            Container(
-                                              width: 20,
-                                              child: Text('1'),
-                                            ),
-                                            Container(
-                                              width: 200,
-                                              child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Text('margherita'),
-                                                  Text('  -mozzarella'),
-                                                  Text('  +carciofi')
-                                                ],
-                                              ),
-                                            ),
-                                            Expanded(
-                                                child: Container(
-                                              child: Text('8.50'),
-                                            )),
-                                            Expanded(
-                                                child: Container(
-                                                    child: Text('8.50')))
-                                          ],
-                                        ),
-                                      ),
-                                      Container(
-                                        padding: EdgeInsets.all(8),
-                                        child: Row(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          children: [
-                                            Container(
-                                              width: 20,
-                                              child: Text('1'),
-                                            ),
-                                            Container(
-                                              width: 200,
-                                              child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Text('margherita'),
-                                                  Text('  -mozzarella'),
-                                                  Text('  +carciofi')
-                                                ],
-                                              ),
-                                            ),
-                                            Expanded(
-                                                child: Container(
-                                              child: Text('8.50'),
-                                            )),
-                                            Expanded(
-                                                child: Container(
-                                                    child: Text('8.50')))
-                                          ],
-                                        ),
-                                      ),
-                                      Container(
-                                        padding: EdgeInsets.all(8),
-                                        child: Row(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          children: [
-                                            Container(
-                                              width: 20,
-                                              child: Text('1'),
-                                            ),
-                                            Container(
-                                              width: 200,
-                                              child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Text('margherita'),
-                                                  Text('  -mozzarella'),
-                                                  Text('  +carciofi')
-                                                ],
-                                              ),
-                                            ),
-                                            Expanded(
-                                                child: Container(
-                                              child: Text('8.50'),
-                                            )),
-                                            Expanded(
-                                                child: Container(
-                                                    child: Text('8.50')))
-                                          ],
-                                        ),
-                                      ),
-                                      Container(
-                                        padding: EdgeInsets.all(8),
-                                        child: Row(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          children: [
-                                            Container(
-                                              width: 20,
-                                              child: Text('1'),
-                                            ),
-                                            Container(
-                                              width: 200,
-                                              child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Text('margherita'),
-                                                  Text('  -mozzarella'),
-                                                  Text('  +carciofi')
-                                                ],
-                                              ),
-                                            ),
-                                            Expanded(
-                                                child: Container(
-                                              child: Text('8.50'),
-                                            )),
-                                            Expanded(
-                                                child: Container(
-                                                    child: Text('8.50')))
-                                          ],
-                                        ),
-                                      ),
-                                      Container(
-                                        padding: EdgeInsets.all(8),
-                                        child: Row(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          children: [
-                                            Container(
-                                              width: 20,
-                                              child: Text('1'),
-                                            ),
-                                            Container(
-                                              width: 200,
-                                              child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Text('margherita'),
-                                                  Text('  -mozzarella'),
-                                                  Text('  +carciofi')
-                                                ],
-                                              ),
-                                            ),
-                                            Expanded(
-                                                child: Container(
-                                              child: Text('8.50'),
-                                            )),
-                                            Expanded(
-                                                child: Container(
-                                                    child: Text('8.50')))
-                                          ],
-                                        ),
-                                      ),
-                                      Container(
-                                        padding: EdgeInsets.all(8),
-                                        child: Row(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          children: [
-                                            Container(
-                                              width: 20,
-                                              child: Text('1'),
-                                            ),
-                                            Container(
-                                              width: 200,
-                                              child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Text('margherita'),
-                                                  Text('  -mozzarella'),
-                                                  Text('  +carciofi')
-                                                ],
-                                              ),
-                                            ),
-                                            Expanded(
-                                                child: Container(
-                                              child: Text('8.50'),
-                                            )),
-                                            Expanded(
-                                                child: Container(
-                                                    child: Text('8.50')))
-                                          ],
-                                        ),
-                                      )
-                                    ],
+                                      ],
+                                    ),
                                   ),
                                 ),
-                              ),
 
-                              //****************************************************************************************************** */
-                              Container(
-                                width: 45,
-                                decoration: BoxDecoration(
-                                  border: Border(
-                                      left: BorderSide(
-                                          color: const Color.fromARGB(
-                                              115, 67, 67, 67),
-                                          width: 0.2)),
-                                  color: Colors.transparent,
-                                ),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: numbers.map((e) {
-                                    return Container(
-                                      decoration: BoxDecoration(
-                                        border: Border(
-                                            top: BorderSide(
-                                                width: 0.2,
-                                                color: const Color.fromARGB(
-                                                    115, 80, 80, 80)),
-                                            bottom: BorderSide(
-                                                width: 0.2,
-                                                color: const Color.fromARGB(
-                                                    115, 220, 220, 220))),
-                                      ),
-                                      child: TextButton(
-                                        child: Text('$e',
-                                            style: GoogleFonts.publicSans(
-                                                fontSize: 15,
-                                                color: const Color.fromARGB(
-                                                    255, 69, 69, 69))),
-                                        onPressed: () {},
-                                      ),
-                                    );
-                                  }).toList(),
-                                ),
-                              )
-                            ],
+                                //****************************************************************************************************** */
+                                Container(
+                                  width: 45,
+                                  decoration: BoxDecoration(
+                                    border: Border(
+                                        left: BorderSide(
+                                            color: const Color.fromARGB(
+                                                115, 67, 67, 67),
+                                            width: 0.2)),
+                                    color: Colors.transparent,
+                                  ),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: numbers.map((e) {
+                                      return Container(
+                                        decoration: BoxDecoration(
+                                          border: Border(
+                                              top: BorderSide(
+                                                  width: 0.2,
+                                                  color: const Color.fromARGB(
+                                                      115, 80, 80, 80)),
+                                              bottom: BorderSide(
+                                                  width: 0.2,
+                                                  color: const Color.fromARGB(
+                                                      115, 220, 220, 220))),
+                                        ),
+                                        child: TextButton(
+                                          child: Text('$e',
+                                              style: GoogleFonts.publicSans(
+                                                  fontSize: 15,
+                                                  color: const Color.fromARGB(
+                                                      255, 69, 69, 69))),
+                                          onPressed: () {},
+                                        ),
+                                      );
+                                    }).toList(),
+                                  ),
+                                )
+                              ],
+                            ),
                           ),
                         ),
+
                         Container(
                           height: 50,
                           color: const Color.fromARGB(255, 69, 69, 69),
@@ -2435,9 +2207,7 @@ class _initState extends State<init> {
                               color: Colors.transparent,
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  
-                                ],
+                                children: [],
                               ),
                             ))
                           ]),
@@ -2467,7 +2237,12 @@ class _initState extends State<init> {
                                         border: Border.all(
                                             width: 0.2, color: Colors.black45)),
                                     child: TextButton(
-                                        onPressed: () {},
+                                        onPressed: () {
+                                          setState(() {
+                                            _vis_detail_panel = false;
+                                            _vis_mm_panel = true;
+                                          });
+                                        },
                                         child: Text(
                                           '1/2MT',
                                           style: GoogleFonts.publicSans(
@@ -2485,7 +2260,10 @@ class _initState extends State<init> {
                                         border: Border.all(
                                             width: 0.2, color: Colors.black45)),
                                     child: TextButton(
-                                        onPressed: () {},
+                                        onPressed: () {
+                                          BlocProvider.of<ProductBloc>(context)
+                                              .add(IngredientTypeLoad());
+                                        },
                                         child: Text(
                                           '1MT',
                                           style: GoogleFonts.publicSans(
@@ -2659,11 +2437,12 @@ class _initState extends State<init> {
                                               255, 232, 232, 232),
                                         )),
                                   ),
-                                   Container(
+                                  Container(
                                     width: 65,
                                     height: 50,
                                     decoration: BoxDecoration(
-                                        color: const Color.fromARGB(255, 223, 43, 43),
+                                        color: const Color.fromARGB(
+                                            255, 223, 43, 43),
                                         border: Border.all(
                                             width: 0.2, color: Colors.black45)),
                                     child: TextButton(

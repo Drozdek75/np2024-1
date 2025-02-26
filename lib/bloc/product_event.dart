@@ -30,3 +30,5 @@ class ProductFilterByCategory extends ProductEvent {
 
   ProductFilterByCategory({required this.category});
 }
+
+class IngredientTypeLoad extends ProductEvent {}
