@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:json_annotation/json_annotation.dart';
 import 'package:np2024_01/models/customer/Customer.dart';
+import 'package:np2024_01/models/order/orderDetail.dart';
 
 part 'Orders.g.dart';
 
@@ -11,8 +12,9 @@ class Orders {
   final int? order_time;
   final int? creation_time;
   Customer? customer;
+  List<OrderDetail> orderDet = [];
 
-  Orders(this.id, this.order_time, this.creation_time, this.customer);
+  Orders(this.id, this.order_time, this.creation_time, this.customer, this.orderDet);
 
   factory Orders.fromJson(Map<String, dynamic> json) => _$OrdersFromJson(json);
 

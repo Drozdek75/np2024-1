@@ -1,12 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:np2024_01/bloc/detail_order_bloc.dart';
+import 'package:np2024_01/models/order/orderDetailFf.dart';
 import 'package:np2024_01/models/products/Ingredient.dart';
 import 'package:np2024_01/widgets/bottomBarFrame.dart';
+import 'package:rxdart/rxdart.dart';
 
 class IngredientListContainer extends StatefulWidget {
   List<Ingredient> lst;
-  IngredientListContainer({super.key, required this.lst});
+  BehaviorSubject bhmacro;
+
+  int cod_sel_macro = -1;
+
+  IngredientListContainer(
+      {super.key, required this.lst, required this.bhmacro});
 
   @override
   State<IngredientListContainer> createState() =>
@@ -24,6 +33,13 @@ class _IngredientListContainerState extends State<IngredientListContainer>
   void initState() {
     super.initState();
     _controller = AnimationController(vsync: this);
+
+    widget.bhmacro.listen(
+      (event) {
+        print('vediamo che codice riga mi stampa: $event');
+        widget.cod_sel_macro = event;
+      },
+    );
   }
 
   @override
@@ -63,7 +79,14 @@ class _IngredientListContainerState extends State<IngredientListContainer>
                     final pricestr = element.price!.toStringAsPrecision(2);
                     index++;
                     return GestureDetector(
-                        onTap: () {
+                        onTap: () async {
+                          orderDetailFF detodd = orderDetailFF(
+                              cod_product: element.id, id: element.id, type: 1);
+                          BlocProvider.of<DetailOrderBloc>(context).add(
+                              detailOrderAddProduct(
+                                  addDetail: detodd, index: widget.bhmacro.value));
+
+                          print('ID: ${element.id}');
                           getSize();
                         },
                         onDoubleTap: () {

@@ -144,18 +144,25 @@ class _orariState extends State<orari> {
 
   @override
   Widget build(BuildContext context) {
+    double _distanceScroll = 0;
+
     if (ModalRoute.of(context)!.settings.arguments != null) {
-     funcHour = ModalRoute.of(context)!.settings.arguments as HoursModel;
-      }
+      funcHour = ModalRoute.of(context)!.settings.arguments as HoursModel;
+    }
 
     return SafeArea(
         child: GestureDetector(
+      onHorizontalDragEnd: (details) {
+        print(details.localPosition.dx - _distanceScroll);
+      },
+      onHorizontalDragDown: (details) {
+        _distanceScroll = details.localPosition.dx;
+      },
       onVerticalDragEnd: (details) {
         if (details.localPosition.dy >=
             MediaQuery.of(context).size.height - 15) {
           Navigator.pop(context);
         }
-
         print('---> ${details.globalPosition.dy}');
       },
       child: Scaffold(
@@ -185,45 +192,50 @@ class _orariState extends State<orari> {
               ),
             ),
           ),
-          body: Container(
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height,
-            color: const Color.fromARGB(255, 57, 57, 57),
-            child: Stack(
-              children: [
-                Container(
-                  margin: EdgeInsets.only(top: 7, right: 135),
-                  child: SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Container(
-                        height: MediaQuery.of(context).size.height,
-                        color: const Color.fromARGB(255, 57, 57, 57),
-                        child: SingleChildScrollView(
-                          scrollDirection: Axis.horizontal,
-                          child: Container(
-                            child: Column(
-                              children: lst_orari.map((ora) {
-                                return Row(
-                                  children: ora.map((E) {
-                                    return Cellagrigliaorari(
-                                      E: E, funct: funcHour, 
-                                     
+          body: Stack(
+            children: [
+              Container(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height,
+                color: const Color.fromARGB(255, 57, 57, 57),
+                child: Stack(
+                  children: [
+                    Container(
+                      margin: EdgeInsets.only(top: 7, right: 135),
+                      child: SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Container(
+                            height: MediaQuery.of(context).size.height,
+                            color: const Color.fromARGB(255, 57, 57, 57),
+                            child: SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              child: Container(
+                                child: Column(
+                                  children: lst_orari.map((ora) {
+                                    return Row(
+                                      children: ora.map((E) {
+                                        return Cellagrigliaorari(
+                                          E: E,
+                                          funct: funcHour,
+                                        );
+                                      }).toList(),
                                     );
                                   }).toList(),
-                                );
-                              }).toList(),
-                            ),
-                          ),
-                        )),
-                  ),
+                                ),
+                              ),
+                            )),
+                      ),
+                    ),
+                    Positioned(
+                      top: 0,
+                      right: 0,
+                      child: parametriSerata(lst_ritardo: lstRitardo),
+                    ),
+                  ],
                 ),
-                Positioned(
-                  top: 0,
-                  right: 0,
-                  child: parametriSerata(lst_ritardo: lstRitardo),
-                ),
-              ],
-            ),
+              ),
+              
+            ],
           )),
     ));
   }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:np2024_01/bloc/dashboard_bloc.dart';
+import 'package:np2024_01/bloc/detail_order_bloc.dart';
 import 'package:np2024_01/bloc/nominativi_bloc.dart';
 import 'package:np2024_01/bloc/orari_bloc.dart';
 import 'package:np2024_01/bloc/product_bloc.dart';
@@ -36,7 +37,10 @@ class MyApp extends StatelessWidget {
             BlocProvider<ProductBloc>(
               create: (context) => ProductBloc(
                   productRepo: context.read(), ingredientRepo: context.read()),
-            )
+            ),
+            BlocProvider<DetailOrderBloc>(
+              create: (context) => DetailOrderBloc(),
+            ),
           ],
           mappers: [],
           providers: [],
@@ -51,7 +55,6 @@ class MyApp extends StatelessWidget {
           child: MaterialApp(
               // onGenerateRoute: generateRouter.generateRoute,
               debugShowCheckedModeBanner: false,
-              
               title: 'Np 2024_01',
               theme: ThemeData(
                 primarySwatch: Colors.blue,

@@ -48,19 +48,54 @@ class Product {
 
 class ListIngredients {
   static List<Ingredient> lstIngredient = [];
+  static List<Ingredient> lstFinal = [];
 
-   ListIngredients();
+  ListIngredients();
 
   static void addIngredient(Ingredient p) {
     lstIngredient.add(p);
   }
 
+  static void addAllIngredients(List<Ingredient> lst) {
+    lstIngredient.addAll(lst);
+  }
+
+  static void addAllIngredientsInLstFinal(List<Ingredient> lst) {
+    lstFinal.addAll(lst);
+  }
+
   static List<Ingredient> getListIngredient() {
     return lstIngredient;
   }
+
+  static Ingredient? findByCod(int cod) {
+    Ingredient? ret = null;
+    print('codice passato: $cod');
+    print('---> ${lstFinal.length}');
+    lstFinal.forEach(
+      (element) {
+        //   print('id: ${element.id} vs $cod');
+        if (element.id == cod) {
+          ret = element;
+        }
+      },
+    );
+    return ret;
+  }
+
+  static double getPriceByCod(int cod) {
+    double ret = 0;
+    lstFinal.forEach(
+      (element) {
+        //   print('id: ${element.id} vs $cod');
+        if (element.id == cod) {
+          ret = element.price!;
+        }
+      },
+    );
+    return ret;
+  }
 }
-
-
 
 class listProducts {
   static List<Product> lstProduct = [];
@@ -74,4 +109,6 @@ class listProducts {
   static List<Product> getListProduct() {
     return lstProduct;
   }
+
+ 
 }

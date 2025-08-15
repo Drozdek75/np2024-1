@@ -25,6 +25,7 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
             lst.sort(
               (a, b) => a.name!.compareTo(b.name!),
             );
+
             emit(ProductLoad(productList: lst));
           },
         );
@@ -90,8 +91,10 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
             lst.sort(
               (a, b) => a.name!.compareTo(b.name!),
             );
+            ListIngredients.addAllIngredients(lst);
           },
         );
+
         emit(IngredientLoad(ingredientList: lst));
         // emit()
       },
@@ -104,6 +107,8 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
         await ingredientRepo.getAllIngredients().then(
           (value) {
             print(value);
+            ListIngredients.addAllIngredients(value);
+            ListIngredients.addAllIngredientsInLstFinal(value);
             emit(IngredientLoad(ingredientList: value));
           },
         );

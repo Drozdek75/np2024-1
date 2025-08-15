@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:np2024_01/bloc/detail_order_bloc.dart';
+import 'package:np2024_01/models/order/orderDetail.dart';
 import 'package:np2024_01/models/products/Product.dart';
 import 'package:np2024_01/widgets/bottomBarFrame.dart';
+import 'package:rxdart/rxdart.dart';
 
 class productListContainer extends StatefulWidget {
   List<Product> lstP;
+  BehaviorSubject bhmacro;
 
-  productListContainer({super.key, required this.lstP});
+  productListContainer({super.key, required this.lstP, required this.bhmacro});
 
   @override
   State<productListContainer> createState() => _productListContainerState();
@@ -58,6 +63,21 @@ class _productListContainerState extends State<productListContainer> {
                     index++;
                     return GestureDetector(
                         onTap: () {
+                          setState(() {
+                            widget.bhmacro.add(0);
+                          });
+                          DateTime time = DateTime.now();
+                          print('ID: ${element.id}');
+                          OrderDetail ord = OrderDetail(
+                              id: element.id!,
+                              name: element.name!,
+                              price: element.price!,
+                              qt: 1,
+                              totale: 7.80,
+                              progressivo: time.millisecondsSinceEpoch,
+                              odd: []);
+                          BlocProvider.of<DetailOrderBloc>(context)
+                              .add(detailOrderAdd(det: ord));
                           getSize();
                         },
                         onDoubleTap: () {
