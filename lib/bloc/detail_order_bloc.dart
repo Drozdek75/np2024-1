@@ -109,14 +109,15 @@ class DetailOrderBloc extends Bloc<DetailOrderEvent, DetailOrderState> {
     double totAdd = 0;
     ordDet.forEach(
       (element) {
+        print('quantita: ${element.qt}');
         if (element.progressivo == cod_sel) {
           tot += element.price * element.qt;
           element.odd.forEach(
             (addOdd) {
               if (addOdd.type == 1) {
-                totAdd += ListIngredients.getPriceByCod(addOdd.cod_product!);
+                totAdd+= ListIngredients.getPriceByCod(addOdd.cod_product!) * element.qt;
               } else if (addOdd.type == -1) {
-                totAdd -= ListIngredients.getPriceByCod(addOdd.cod_product!);
+                totAdd -= ListIngredients.getPriceByCod(addOdd.cod_product!) * element.qt;
               }
               /* if (totAdd <= 0) {
             tot = 0;
@@ -147,9 +148,9 @@ class DetailOrderBloc extends Bloc<DetailOrderEvent, DetailOrderState> {
         element.odd.forEach(
           (addOdd) {
             if (addOdd.type == 1) {
-              totAdd += ListIngredients.getPriceByCod(addOdd.cod_product!);
+              totAdd += ListIngredients.getPriceByCod(addOdd.cod_product!) * element.qt;
             } else if (addOdd.type == -1) {
-              totAdd -= ListIngredients.getPriceByCod(addOdd.cod_product!);
+              totAdd -= ListIngredients.getPriceByCod(addOdd.cod_product!) * element.qt;
             }
           },
         );
