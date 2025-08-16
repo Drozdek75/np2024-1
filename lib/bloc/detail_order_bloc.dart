@@ -106,6 +106,7 @@ class DetailOrderBloc extends Bloc<DetailOrderEvent, DetailOrderState> {
 
   double getTotale(int cod_sel) {
     double tot = 0;
+    double totAdd = 0;
     ordDet.forEach(
       (element) {
         if (element.progressivo == cod_sel) {
@@ -113,16 +114,51 @@ class DetailOrderBloc extends Bloc<DetailOrderEvent, DetailOrderState> {
           element.odd.forEach(
             (addOdd) {
               if (addOdd.type == 1) {
-                tot += ListIngredients.getPriceByCod(addOdd.cod_product!);
+                totAdd += ListIngredients.getPriceByCod(addOdd.cod_product!);
               } else if (addOdd.type == -1) {
-                tot -= ListIngredients.getPriceByCod(addOdd.cod_product!);
+                totAdd -= ListIngredients.getPriceByCod(addOdd.cod_product!);
               }
+              /* if (totAdd <= 0) {
+            tot = 0;
+          } else {
+            tot = totAdd;
+          }*/
             },
           );
         }
       },
     );
 
+    print('totAdd:${totAdd}');
+    if (totAdd < 0) {
+      totAdd = 0;
+    }
+    print('super totale: ${getSuperTotale()}');
+    return tot + totAdd;
+  }
+
+  double getSuperTotale() {
+    double tot = 0;
+    double totAdd = 0;
+    ordDet.forEach(
+      (element) {
+        tot += element.price * element.qt;
+        totAdd = 0;
+        element.odd.forEach(
+          (addOdd) {
+            if (addOdd.type == 1) {
+              totAdd += ListIngredients.getPriceByCod(addOdd.cod_product!);
+            } else if (addOdd.type == -1) {
+              totAdd -= ListIngredients.getPriceByCod(addOdd.cod_product!);
+            }
+          },
+        );
+        if (totAdd < 0) {
+          totAdd = 0;
+        }
+        tot += totAdd;
+      },
+    );
     return tot;
   }
 
