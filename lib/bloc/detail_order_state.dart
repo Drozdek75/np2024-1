@@ -21,15 +21,21 @@ class DetailOrderLoad extends DetailOrderState {
 class DetailOrderAddState extends DetailOrderState {
   List<OrderDetail> ord = [];
   int inc, inx = 0;
+  double total = 0.0;
 
-
-  DetailOrderAddState({required this.ord, required this.inc, required inx}) {
+  DetailOrderAddState({required this.ord, required this.inc, required inx, required this.total}) {
     print('-->${ord.length}');
   }
 
   @override
-  List<Object> get props => [ord.hashCode, inc];
+  List<Object> get props => [ord.hashCode, inc, total];
 }
 
+class DetailOrderTotal extends DetailOrderState {
+  double total = 0;
 
+  DetailOrderTotal({required this.total});
 
+  @override
+  List<Object> get props => [total];
+}

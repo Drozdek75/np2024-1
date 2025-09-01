@@ -17,6 +17,7 @@ import 'package:np2024_01/widgets/IngredientListContainer.dart';
 import 'package:np2024_01/widgets/intensionFrame.dart';
 import 'package:np2024_01/widgets/listProductContainer.dart';
 import 'package:np2024_01/widgets/nominativi.dart';
+import 'package:np2024_01/widgets/orders/ordersDialog.dart';
 import 'package:syncfusion_flutter_pdf/pdf.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -88,10 +89,11 @@ class _initState extends State<init> {
       onVerticalDragEnd: (details) {
         print(details.globalPosition.dx);
         if (details.globalPosition.dx <= 0) {
-          Nominativo.dialogBuilder(context);
+          // Nominativo.dialogBuilder(context);
         }
         if (details.globalPosition.dx > MediaQuery.of(context).size.width - 5) {
-          Nominativo.dialogBuilder(context, setName);
+          //  Nominativo.dialogBuilder(context, setName);
+          OrdersDialog.showDialogOrder(context);
         }
       },
       child: Scaffold(
@@ -582,15 +584,34 @@ class _initState extends State<init> {
                               color: const Color.fromARGB(255, 69, 69, 69),
                               child: Row(
                                 children: [
-                                  Container(
-                                    width: 260,
-                                    child: Center(
-                                      child: Text(
-                                        '€ 40.00',
-                                        style: GoogleFonts.publicSans(
-                                            fontSize: 16, color: Colors.white),
-                                      ),
-                                    ),
+                                  BlocBuilder<DetailOrderBloc,
+                                      DetailOrderState>(
+                                    builder: (context, state) {
+                                      if (state is DetailOrderAddState) {
+                                        return Container(
+                                          width: 260,
+                                          child: Center(
+                                            child: Text(
+                                              '€ ${state.total.toStringAsFixed(2)}',
+                                              style: GoogleFonts.publicSans(
+                                                  fontSize: 16,
+                                                  color: Colors.white),
+                                            ),
+                                          ),
+                                        );
+                                      }
+                                      return Container(
+                                        width: 260,
+                                        child: Center(
+                                          child: Text(
+                                            '€ 0.00',
+                                            style: GoogleFonts.publicSans(
+                                                fontSize: 16,
+                                                color: Colors.white),
+                                          ),
+                                        ),
+                                      );
+                                    },
                                   ),
                                   Expanded(
                                     child: Container(
@@ -1897,6 +1918,15 @@ class _initState extends State<init> {
                                             onTap: () {
                                               setState(() {
                                                 subcategory = 6;
+                                                if (category == 1) {
+                                                  BlocProvider.of<ProductBloc>(
+                                                          context)
+                                                      .add(productLoad());
+                                                } else if (category == 2) {
+                                                  BlocProvider.of<ProductBloc>(
+                                                          context)
+                                                      .add(ingredientLoad());
+                                                }
                                               });
                                             },
                                             child: Container(
@@ -2494,11 +2524,11 @@ class _initState extends State<init> {
                                     if (category == 1) {
                                       BlocProvider.of<ProductBloc>(context).add(
                                           ProductLoadStartWith(
-                                              letter: ['z', '*']));
+                                              letter: ['z', 'w']));
                                     } else if (category == 2) {
                                       BlocProvider.of<ProductBloc>(context).add(
                                           IngredientLoadStartWith(
-                                              letter: ['z', '*']));
+                                              letter: ['z', 'w']));
                                     }
                                   },
                                   child: Container(
@@ -2515,7 +2545,7 @@ class _initState extends State<init> {
                                     ),
                                     height: 40,
                                     child: Center(
-                                        child: Text(' Z ',
+                                        child: Text(' Z - W ',
                                             style: GoogleFonts.prompt(
                                                 fontSize: 15,
                                                 color: const Color.fromARGB(
@@ -2872,15 +2902,13 @@ class _initState extends State<init> {
                                                 color: Colors.black45)),
                                         child: TextButton(
                                             onPressed: () {
-                                              BlocProvider.of<
-                                                            DetailOrderBloc>(
-                                                        context)
-                                                    .add(minusPlus(
-                                                        cod_macro:
-                                                            bhmacro.value,
-                                                        cod_ingredient:
-                                                            bhadd.value,
-                                                        op: 1));
+                                              BlocProvider.of<DetailOrderBloc>(
+                                                      context)
+                                                  .add(minusPlus(
+                                                      cod_macro: bhmacro.value,
+                                                      cod_ingredient:
+                                                          bhadd.value,
+                                                      op: 1));
                                             },
                                             child: Icon(
                                               Icons.add,

@@ -22,7 +22,7 @@ class DetailOrderBloc extends Bloc<DetailOrderEvent, DetailOrderState> {
       print('order lengfht: ${ordDet.length}');
 
       emit(DetailOrderAddState(
-          ord: ordDet, inc: random.nextInt(99999), inx: (ordDet.length + 1)));
+          ord: ordDet, inc: random.nextInt(99999), inx: (ordDet.length + 1), total: getSuperTotale()));
     });
 
     on<detailOrderAddProduct>(
@@ -41,7 +41,7 @@ class DetailOrderBloc extends Bloc<DetailOrderEvent, DetailOrderState> {
           },
         );
         emit(DetailOrderAddState(
-            ord: ordDet, inc: random.nextInt(99999), inx: (ordDet.length + 1)));
+            ord: ordDet, inc: random.nextInt(99999), inx: (ordDet.length + 1), total: getSuperTotale()));
       },
     );
 
@@ -61,7 +61,7 @@ class DetailOrderBloc extends Bloc<DetailOrderEvent, DetailOrderState> {
           },
         );
         emit(DetailOrderAddState(
-            ord: ordDet, inc: random.nextInt(99999), inx: (ordDet.length + 1)));
+            ord: ordDet, inc: random.nextInt(99999), inx: (ordDet.length + 1), total: getSuperTotale()));
       },
     );
 
@@ -79,7 +79,7 @@ class DetailOrderBloc extends Bloc<DetailOrderEvent, DetailOrderState> {
           },
         );
         emit(DetailOrderAddState(
-            ord: ordDet, inc: random.nextInt(99999), inx: (ordDet.length + 1)));
+            ord: ordDet, inc: random.nextInt(99999), inx: (ordDet.length + 1), total: getSuperTotale()));
       },
     );
 
@@ -99,7 +99,7 @@ class DetailOrderBloc extends Bloc<DetailOrderEvent, DetailOrderState> {
           },
         );
         emit(DetailOrderAddState(
-            ord: ordDet, inc: random.nextInt(99999), inx: (ordDet.length + 1)));
+            ord: ordDet, inc: random.nextInt(99999), inx: (ordDet.length + 1), total: getSuperTotale()));
       },
     );
   }
